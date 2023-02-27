@@ -1,0 +1,23 @@
+server:
+  port: ${PORT:8084}
+---
+spring:
+  kafka:
+    topic: message
+    consumer:
+      bootstrap-servers: kafka:9092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  datasource:
+    db-name: simple
+    host: localhost
+    port: 5432
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.db-name}
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
