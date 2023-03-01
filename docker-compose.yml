@@ -3,6 +3,7 @@ version: '3.8'
 services:
   nginx:
     build: ./nginx
+    container_name: nginx
     ports:
       - "8080:80"
     networks:
@@ -38,6 +39,7 @@ services:
     depends_on:
       - postgres
       - kafka
+      - producer-app3
 
   producer-app1:
     environment:
@@ -61,6 +63,7 @@ services:
       - network
     depends_on:
       - kafka
+      - producer-app1
   producer-app3:
     environment:
       - PORT=8083
@@ -72,6 +75,7 @@ services:
       - network
     depends_on:
       - kafka
+      - producer-app2
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
